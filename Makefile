@@ -1,9 +1,10 @@
 CC := gcc
 CXX := g++
 CFLAGS := -g
-CXXFLAGS := -g
+CXXFLAGS := -g -Wall
 INCLUDES := /usr/local/lib
 INCLUDES += -lsndfile
+INCLUDES += -I ./src/
 
 
 setup:
@@ -11,8 +12,10 @@ setup:
 	sudp apt-get install libsndfile1
 	sudo apt-get install libsndfile1-dev
 
-test:
-	$(CC) $(CXXFLAGS) main.c -L $(INCLUDES) -o test.o
+# test:
+# 	$(CC) $(CXXFLAGS) main.c -L $(INCLUDES) -o test.o
 
 testcpp:
-	$(CXX) $(CXXFLAGS) main.cc -L $(INCLUDES) -o testcpp.o
+	pwd
+	$(CXX) $(CXXFLAGS) ./test/main.cc -L $(INCLUDES) -o ./test/bin/testcpp.o
+	$(./bin/testcpp.o)
