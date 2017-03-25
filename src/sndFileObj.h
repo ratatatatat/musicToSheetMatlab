@@ -13,6 +13,7 @@ class sndFileObj{
 		int getFrames();
 		int getChannels();
 		int getSampleRate();
+		void getChannelValues(int *buffer, int channel);//channel starting from 0
 
 	private:
 		// SndfileHandle soundFile ; // Initialize the c++ libsndfile wrapper

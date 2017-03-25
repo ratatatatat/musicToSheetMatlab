@@ -35,6 +35,17 @@ void sndFileObj::getWavValues(int ** arry){
     return;
 }
 
+void sndFileObj::getChannelValues(int *buffer, int channel){
+	int i,index;
+	int c = this->c;
+	int num = this->num;
+	for (i = channel; i < num; i += c){
+		index = i / c;
+		buffer[index] = this->buf[i];
+	}
+	return;
+}
+
 int sndFileObj::getFrames(){
 	return this->f;
 }

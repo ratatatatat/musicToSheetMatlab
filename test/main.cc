@@ -18,7 +18,12 @@ int main (void){
     // printf ("    Channels    : %d\n", file.channels ()) ;
 
     int channels = file.getChannels();
+    int frames = file.getFrames();
+    int * buffer;
+    buffer = (int *) malloc(frames*sizeof(int));
+    file.getChannelValues(buffer, 0);
     puts ("Done.\n") ;
     printf("The number of channels are %d \n",channels);
+    printf("values from the channel[0][0], %d",buffer[0]);
     return 0 ;
 } 
