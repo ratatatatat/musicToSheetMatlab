@@ -7,13 +7,27 @@ INCLUDES += -lsndfile
 INCLUDES += -I ./src/
 
 
-setup:
+setupSound:
 	sudo apt-get update
-	sudp apt-get install libsndfile1
+	sudo apt-get install libsndfile1
 	sudo apt-get install libsndfile1-dev
 
-# test:
-# 	$(CC) $(CXXFLAGS) main.c -L $(INCLUDES) -o test.o
+setupFFT:
+	# wget -P /tmp/  http://www.fftw.org/fftw-3.3.6-pl2.tar.gz
+	# tar xvzf fftw-3.3.6-pl2.tar.gz
+	# cd fftw-3.3.6-pl2/
+	# sudo ./configure
+	# sudo make
+	# sudo make install
+	sudo apt-get update
+	sudo apt-get install libfftw3-dev libfftw3-doc
+	# Install the C++ Wrapper
+	git clone https://github.com/dealias/fftwpp.git
+	cd fftwpp
+	cd tests
+	make
+	cd ../wrappers
+	make
 
 testcpp:
 	pwd

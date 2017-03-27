@@ -4,26 +4,33 @@
 #include    <cstring>
 #include "sndFileObj.cpp"
 #include    <sndfile.hh>
+#include "Array.h"
+#include "fftw++.h"
 
+#define TEMPO   120
+#define QUARTERNOTE 60
+
+using namespace std;
+using namespace utils;
+using namespace Array;
+using namespace fftwpp;
 
 int main (void){   
 
     const char * fname = "/home/rajiv/Desktop/gitHub/musicToSheetMatlab/E.wav" ;
-    // SndfileHandle file ;
-
-    // file = SndfileHandle (fname) ;
     sndFileObj file(fname);
-    // printf ("Opened file '%s'\n", fname) ;
-    // printf ("    Sample rate : %d\n", file.samplerate ()) ;
-    // printf ("    Channels    : %d\n", file.channels ()) ;
 
     int channels = file.getChannels();
     int frames = file.getFrames();
+    int sampleRate = file.getSampleRate();
     int * buffer;
     buffer = (int *) malloc(frames*sizeof(int));
     file.getChannelValues(buffer, 0);
-    puts ("Done.\n") ;
-    printf("The number of channels are %d \n",channels);
-    printf("values from the channel[0][0], %d \n",buffer[0]);
+    int sampleLength = (QUARTERNOTE/TEMPO) * sampleRate;
+    int fftInput [sampleLength];
+    for(int i = 0; i < sampleLength; i++){
+        fftInput[i] = buffer[i];
+    }
+
     return 0 ;
 } 
