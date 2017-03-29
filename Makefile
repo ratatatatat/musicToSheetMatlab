@@ -2,9 +2,14 @@ CC := gcc
 CXX := g++
 CFLAGS := -g
 CXXFLAGS := -g -Wall
-INCLUDES := /usr/local/lib
-INCLUDES += -lsndfile
-INCLUDES += -I ./src/
+
+LDFLAGS := /usr/local/lib
+LDFLAGS += -lsndfile -lfftw3 -lfftw3_omp
+
+INCLUDES := -I ./src/ 
+INCLUDES += -I ./fftwpp/
+
+
 
 
 setupSound:
@@ -31,5 +36,7 @@ setupFFT:
 
 testcpp:
 	pwd
-	$(CXX) $(CXXFLAGS) ./test/main.cc -L $(INCLUDES) -o ./test/bin/testcpp.o
-	$(./bin/testcpp.o)
+	$(CXX) $(CXXFLAGS) ./test/main.cc -L $(LDFLAGS) $(INCLUDES) -o ./test/bin/testcpp.o
+
+testfft:
+	$(CXX) $(CXXFLAGS) ./test/fftcppDemo.cc -L $(LDFLAGS) $(INCLUDES) -o ./test/bin/fftTestcpp.o
